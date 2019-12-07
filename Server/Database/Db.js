@@ -1,17 +1,24 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
+  host : 'localhost',
+  user : 'root',
+  port :  '3306',
   password : 'Root@123',
   database : 'Exam'
 });
 
-connection.connect();
+class Db{
+  constructor(){
+    connection.connect();
 
-connection.query('Select * from Table', function (error, results, fields) {
-  if (error)
-    throw error;
-  console.log('The solution is: ', results);
-});
+    connection.query('Select * from Users ', function (error, results, fields) {
+      if (error)
+        throw error;
+      console.log('The solution is: ', results);
+    });
 
-connection.end();
+    connection.end();
+  }
+}
+
+module.exports =  connection;

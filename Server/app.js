@@ -11,14 +11,13 @@ app.use(express.json({limit:'5mb'}));
     res.json("Hello")
 });
 */
-
- app.post("/api",function (request,response){
+app.post("/api",function (request,response){
    try{
    console.log("request from client",request.body);
    let data = {
-	"message": "Lol" 
+	"message": "Lol"
    };
-   
+
    console.log("request from client",data);
    response.send(JSON.stringify(data));
   }
