@@ -27,7 +27,12 @@ class Task extends Component{
 }
   render(){
 
-    	return(<>Hello from Task  {this.state.message}</>);
+      //return(<>Hello from Task  {this.state.message}</>);
+      return(
+        <div>
+          Hello
+          </div>
+      );
     
  
   }
