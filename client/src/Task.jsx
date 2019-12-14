@@ -18,7 +18,7 @@ class Task extends Component{
 	let data = await response.json();
 	return data;
       }).then(data=>{
-		console.log("client==>",data);
+		console.log("client==>",data); 
 		this.setState({
 			message: data.message
 		})
@@ -29,9 +29,8 @@ class Task extends Component{
 
       //return(<>Hello from Task  {this.state.message}</>);
       return(
-        <div>
-          Hello
-          </div>
+          <></>
+          
       );
     
  

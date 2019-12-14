@@ -7,4 +7,9 @@ Users(
   Password VARCHAR(10) NOT NULL
 );
 
-INSERT INTO Users VALUES(1,"Admin","Admin@123");
+INSERT INTO Users VALUES(1,"Savita",HASHBYTES('Admin@123'));
+INSERT INTO Users VALUES(1,"Shilpi",HASHBYTES('Shilpi123@'));
+
+-- question qid 4 option
+-- qid ansid
+-- userid testid score
