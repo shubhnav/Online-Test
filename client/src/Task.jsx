@@ -5,7 +5,7 @@ class Task extends Component{
     this.state = {
 	message : ""
     }
-    
+
   }
   async componentWillMount(){
       await fetch("/api",{
@@ -23,7 +23,7 @@ class Task extends Component{
 			message: data.message
 		})
 	})
-          
+
 }
   render(){
 
@@ -33,8 +33,8 @@ class Task extends Component{
           Hello
           </div>
       );
-    
- 
+
+
   }
 }
 export default Task;
