@@ -4,12 +4,12 @@ import './App.css';
 import Task from './Task';
 import Login from "./Login/Login";
 import Signup from "./Signup/Signup";
-import Que from "./Que/Que"
+import Course from "./Course_selection/Course_selection";
 function App() {
 
   return (
     <div>
-    <Login></Login>
+    <Task></Task>
    
     </div>
   );

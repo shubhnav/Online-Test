@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Que from "../Que/Que";
-const Question = 2;
+import Course_selection from "../Course_selection/Course_selection"
+const course = 2;
 const login = 1;
 class Login extends Component{
   constructor(props){
@@ -10,6 +10,7 @@ class Login extends Component{
     }
     this.handleLogin = this.handleLogin.bind(this);
   }
+  
   render(){
     if(this.state.pageStatus == login){
     return(
@@ -34,13 +35,14 @@ class Login extends Component{
           ) ;
     }
     else{
-      return (<Que></Que>);
+      return (<Course_selection></Course_selection>);
     }
-    }
-    handleLogin(){
-      let pageStatus = Question;
+  }
+
+  handleLogin(){
+      let pageStatus = course;
       this.setState({
-        pageStatus : Question
+        pageStatus : pageStatus
       })
     }
 }

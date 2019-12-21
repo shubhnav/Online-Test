@@ -4,12 +4,17 @@ class Que extends Component{
       super(props);
       this.state = {
      }
-    } 
+     this.get_score = this.get_score.bind(this);
 
+    } 
+    get_score(){
+
+    }
     render(){
         return(
             <div>
             <table>
+            
             <tr> Q1:-What is full form of RAM </tr>
             <tr>   <input type="radio"name="comp" value="a"/>Read Only Memory </tr>
             <tr>    <input type="radio"name="comp" value="b"/>Random Access Memory </tr>
@@ -21,7 +26,10 @@ class Que extends Component{
            
             <p><input type="button" value="Submit"/> </p>
             <p><input type="button" value="Next"/>  </p>
+            {/*<input type = "button" value= "Submit" onClick = {this.get_score}/> */}
             </div>
+            
+            
             );
         }
     }
