@@ -9,14 +9,14 @@ var connection = mysql.createConnection({
 
 class Db{
   constructor(){
-    connection.connect();
-
-    connection.query('Select * from Users ', function (error, results, fields) {
-      if (error)
-        throw error;
-      console.log('The solution is: ', results);
-    });
-
+    this.con = connection.connect();
+  }
+  query(SelectQuery){
+    this.con.query(SelectQuery,(error,results)=>{
+      if(error)
+        return reject(error);
+      
+    })
     connection.end();
   }
 }
