@@ -8,19 +8,19 @@ class Task extends Component{
 
   }
   async componentWillMount(){
-      await fetch("/api",{
+      await fetch("/api/user",{
       method: "post",
       headers:{
         "Content-Type":"application/json"
-      },
-      body: JSON.stringify({"message": "Hello"})
+      }
       }).then( async function(response){
-	let data = await response.json();
-	return data;
+      console.log("response",response);
+    	let data = await response.json();
+    	return data;
       }).then(data=>{
 		console.log("client==>",data);
 		this.setState({
-			message: data.message
+			message: data
 		})
 	})
 

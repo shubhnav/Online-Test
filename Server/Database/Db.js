@@ -9,16 +9,28 @@ var connection = mysql.createConnection({
 
 class Db{
   constructor(){
-    this.con = connection.connect();
+    connection.connect();
   }
   query(SelectQuery){
-    this.con.query(SelectQuery,(error,results)=>{
-      if(error)
-        return reject(error);
-      
+    return new Promise(async(resolve,reject)=>{
+      try{
+
+      console.log("SelectQuery==>", SelectQuery);
+      connection.query(SelectQuery, function (error, results, fields) {
+        if (error)
+          return reject(error);
+        resolve(results);
+      });
+
+      //connection.end();
+    }
+    catch(err){
+      console.log(err);
+      return reject(err);
+    }
     })
-    connection.end();
   }
+
 }
 
-module.exports =  connection;
+module.exports = new Db();
