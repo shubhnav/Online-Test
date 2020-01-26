@@ -13,7 +13,6 @@ class Que extends Component{
      }
 
      this.handleRadio = this.handleRadio.bind(this);
-     this.handleSubmit = this.handleSubmit.bind(this);
      this.handleNext = this.handleNext.bind(this);
      this.handleEnd = this.handleEnd.bind(this);
     }
@@ -72,12 +71,16 @@ class Que extends Component{
                       {this.state.questionArray[index]}
                     </tbody>
                   </table>
-                  <button type="button" onClick = {this.handleSubmit} value="Submit">Submit</button>
                   <button type="button" onClick = {this.handleNext} value="Next">  Next</button>
                 </div>
                 );
           }
-          return (<button type="button" onClick = {this.handleEnd} value="Submit">End</button>);
+          return (
+            <div>
+            TEST END!!<br/>
+            <button type="button" onClick = {this.handleEnd} value="Submit">GO TO RESULTS</button>
+            </div>
+          );
           }
         else if(this.state.pageStatus == results){
           let data = {};
@@ -102,21 +105,18 @@ class Que extends Component{
      });
    }
 
-   handleSubmit(){
-      let qid = this.state.indexQidMap[this.state.selectedIndex];
-      let selectedOption = this.state.selectedOption;
-      let selectedAns = this.state.selectedAns;
-      selectedAns[qid] = selectedOption;
-      this.setState({
-        selectedAns: selectedAns
-      })
-   }
 
    handleNext(){
+     let qid = this.state.indexQidMap[this.state.selectedIndex];
+     let selectedOption = this.state.selectedOption;
+     let selectedAns = this.state.selectedAns;
+     selectedAns[qid] = selectedOption;
+
      let selectedIndex = this.state.selectedIndex;
      selectedIndex++;
      this.setState({
-       selectedIndex: selectedIndex
+       selectedIndex: selectedIndex,
+       selectedAns: selectedAns
      })
    }
     }

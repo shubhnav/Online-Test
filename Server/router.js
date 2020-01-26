@@ -34,6 +34,23 @@ router.post('/question', function(req, res) {
   });
 });
 
+router.post('/signup', function(req, res) {
+  req =  req.body;
+  let SelectQuery = "INSERT INTO Users SET Username = '"+req.user+"', Password = '"+ req.pass+"'";
+  console.log("SelectQuery==>",SelectQuery);
+  db.query(SelectQuery).then (function (results){
+  console.log("result==>",results);
+  let data = {};
+  if(results.affectedRows == 1){
+    data.insert = true;
+  }
+  else{
+      data.insert = false;
+  }
+    res.send(data);
+  });
+});
+
 async function correct_ans(qid, opid){
   return new Promise(async (resolve,reject)=>{
     let SelectQuery = "Select correct_ans from Answer where Qid = "+ qid;
@@ -44,6 +61,7 @@ async function correct_ans(qid, opid){
     });
   })
 }
+
 router.post('/result', async function(req, res) {
   req =  req.body;
   let results = [];
@@ -56,7 +74,6 @@ router.post('/result', async function(req, res) {
     results.push(data);
   }
   res.send(results);
-
 });
 
 module.exports = router;

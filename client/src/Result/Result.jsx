@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import Course from "../Course_selection/Course_selection";
+const course = 2;
 class Result extends Component{
   constructor(props){
     super(props);
+    this.props = props;
     this.state = {
 
     }
@@ -53,8 +56,12 @@ class Result extends Component{
   }
   render() {
     if(this.state.initial == true){
+      if(this.state.pageStatus == course){
+        return(<Course></Course>);
+      }
+      else{
       return(
-
+          <>
           <table>
           <thead>
             <th>Question </th>
@@ -66,17 +73,31 @@ class Result extends Component{
             {this.state.resultArray}
           </tbody>
           </table>
+          <table>
+          <thead>
+            <th>MAX SCORE</th>
+            <th>OBTAINED</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td>{this.state.max_score}</td>
+          <td>{this.state.total_score}</td>
+          </tr>
+          </tbody>
+          </table>
+          <button value = {course} onClick= {this.handleHome}>GO TO HOME</button>
+          </>
          );
+       }
     }
     else{
       return (<></>)
     }
   }
+  handleHome =event=>{
+    this.setState({
+      pageStatus: event.target.value
+    })
+  }
   }
   export default Result;
-/*
-<tr>
-  <td>{this.state.max_score}</td>
-  <td>{this.state.total_score}</td>
-</tr>
-*/

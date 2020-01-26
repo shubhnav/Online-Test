@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Course_selection from "../Course_selection/Course_selection"
+import SignUp from "../Signup/Signup";
 const course = 2;
 const login = 1;
+const signup = 3;
 class Login extends Component{
   constructor(props){
     super(props);
@@ -9,6 +11,7 @@ class Login extends Component{
       pageStatus: login
     }
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
     this.checkValidUser = this.checkValidUser.bind(this);
   }
 
@@ -30,12 +33,16 @@ class Login extends Component{
                 </tr>
                 </tbody>
               </table>
-              <button type ="button" onClick={this.handleLogin}>Login</button>
+              <button type ="button" onClick={this.handleLogin}>LOGIN</button>
+              <button type ="button" onClick={this.handleSignup}>SIGN UP</button>
           </div>
         ) ;
     }
+    else if(this.state.pageStatus == signup){
+      return(<SignUp/>)
+    }
     else{
-      return (<Course_selection {...this.props} ></Course_selection>);
+      return (<Course_selection ></Course_selection>);
     }
   }
 
@@ -72,6 +79,11 @@ class Login extends Component{
     })
   }
 
+  handleSignup(){
+    this.setState({
+      pageStatus: signup
+    })
+  }
   async handleLogin(){
     return new Promise(async(resolve,reject)=>{
       let user = document.getElementById("name").value;

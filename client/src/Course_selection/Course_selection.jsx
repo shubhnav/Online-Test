@@ -1,7 +1,9 @@
 import React ,{ Component } from 'react';
 import Que from "../Que/Que";
+import Login from "../Login/Login";
 const que=2;
 const course=1;
+const login = 3;
 class Course extends Component{
     constructor (props){
     super(props);
@@ -9,6 +11,7 @@ class Course extends Component{
          pageStatus: course
      }
     this.handleCourse = this.handleCourse.bind(this);
+    this.handlelogout = this.handlelogout.bind(this);
     }
 
     async componentWillMount(){
@@ -36,6 +39,7 @@ class Course extends Component{
     }
 
     render(){
+    console.log("State", this.state);
     if(this.state.pageStatus == course){
         return (
            <div>
@@ -43,6 +47,8 @@ class Course extends Component{
                 <h1>Choose Your Branch</h1>
                     {this.state.branch}
                 </center>
+                <button onClick = {this.handlelogout} value = {login} >LOG OUT</button>
+
             </div>
         )
     }
@@ -51,9 +57,18 @@ class Course extends Component{
         data.selectedBranch = this.state.selectedBranch;
         return (<Que data = {data}></Que>);
         }
+    else if(this.state.pageStatus == login){
+            return (<Login></Login>);
+            }
     else{
       return(<>Select Branch</>)
     }
+  }
+
+    handlelogout = event=>{
+      this.setState({
+        pageStatus: parseInt(event.target.value)
+      })
     }
     handleCourse=event=>{
         console.log("Selected BranchName", event.target.value);
