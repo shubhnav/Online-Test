@@ -7,13 +7,7 @@ Users(
   Password VARCHAR(10) NOT NULL
 );
 
-INSERT INTO Users VALUES(1,"Savita",HASHBYTES('Admin@123'));
-INSERT INTO Users VALUES(1,"Shilpi",HASHBYTES('Shilpi123@'));
-
--- question qid 4 option
--- qid ansid
--- userid testid score
-
+INSERT INTO Users VALUES(1,"Admin",'Admin@123');
 
 CREATE TABLE IF NOT EXISTS
 Branch(
@@ -54,7 +48,6 @@ INSERT INTO Question VALUES (4,'Which is not used as a refrigerant ?','ammonia',
 'sulphur dioxide','carbon monoxide','carbon dioxide',104);
 INSERT INTO Question VALUES (5,'Upsetting is the term used in','turning',
 'forging','casting','drilling',105);
-
 
 CREATE TABLE Answer(
     Qid INT(1) NOT NULL,
