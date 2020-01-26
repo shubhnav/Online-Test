@@ -1,4 +1,5 @@
 import React ,{ Component } from 'react';
+import {Button} from 'react-bootstrap';
 import Que from "../Que/Que";
 import Login from "../Login/Login";
 const que=2;
@@ -28,7 +29,7 @@ class Course extends Component{
         }).then(data=>{
           let branch = [];
           for(let index = 0 ;index<data.length;index++){
-            branch.push(<button type="button" value = {data[index].BranchId} onClick={this.handleCourse}>{data[index].BranchName} </button>);
+            branch.push(<Button variant="outline-secondary" value = {data[index].BranchId} onClick={this.handleCourse}>{data[index].BranchName} </Button>);
           }
           this.setState({
             branch: branch
@@ -42,14 +43,14 @@ class Course extends Component{
     console.log("State", this.state);
     if(this.state.pageStatus == course){
         return (
-           <div>
-               <center>
+             <center>
                 <h1>Choose Your Branch</h1>
                     {this.state.branch}
-                </center>
-                <button onClick = {this.handlelogout} value = {login} >LOG OUT</button>
-
-            </div>
+                <br/>
+                <br/>
+                <br/>
+                <Button variant="danger" onClick = {this.handlelogout} value = {login} >LOG OUT</Button>
+              </center>
         )
     }
     else if(this.state.pageStatus == que){

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button, ButtonToolbar,ButtonGroup} from 'react-bootstrap';
 import Login from "../Login/Login";
 const login = 1;
 
@@ -17,8 +18,8 @@ class Signup extends Component{
         }
         else{
         return(
-        <div>
-          <h2>Signup</h2>
+        <center>
+          <h2>SIGNUP</h2>
             <table>
               <tr>
                 <td>Username: </td>
@@ -36,11 +37,14 @@ class Signup extends Component{
                 <td>Confirm Password:</td>
                 <td> <input type =  "password" id = "pass2" /> </td>
               </tr>
-              <button type ="button" onClick ={this.handleSubmit }>SUBMIT</button>
-              <button type ="button" onClick ={this.handleLogin }>LOG IN</button>
-            </table>
 
-        </div>
+            </table>
+            <br/>
+              <Button variant="success" onClick ={this.handleSubmit }>SUBMIT</Button>
+              <Button variant="primary" onClick ={this.handleLogin }>LOG IN</Button>
+
+
+        </center>
         );
       }
     }

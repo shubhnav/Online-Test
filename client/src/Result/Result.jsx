@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button,Table} from 'react-bootstrap';
 import Course from "../Course_selection/Course_selection";
 const course = 2;
 class Result extends Component{
@@ -62,18 +63,18 @@ class Result extends Component{
       else{
       return(
           <>
-          <table>
+          <Table striped bordered hover>
           <thead>
-            <th>Question </th>
-            <th>Selected Option</th>
-            <th>Correct Option</th>
-            <th>Marks Obtained</th>
+            <th>QUESTION </th>
+            <th>SELECTED OPTION</th>
+            <th>CORRECT OPTION</th>
+            <th>MARKS OBTAINED</th>
           </thead>
           <tbody>
             {this.state.resultArray}
           </tbody>
-          </table>
-          <table>
+          </Table>
+          <Table striped bordered hover variant="dark">
           <thead>
             <th>MAX SCORE</th>
             <th>OBTAINED</th>
@@ -84,8 +85,8 @@ class Result extends Component{
           <td>{this.state.total_score}</td>
           </tr>
           </tbody>
-          </table>
-          <button value = {course} onClick= {this.handleHome}>GO TO HOME</button>
+          </Table>
+          <center><Button variant="success" value = {course} onClick= {this.handleHome}>GO TO HOME</Button></center>
           </>
          );
        }

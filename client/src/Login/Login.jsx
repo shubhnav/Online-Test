@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
 import Course_selection from "../Course_selection/Course_selection"
 import SignUp from "../Signup/Signup";
 const course = 2;
@@ -19,7 +20,7 @@ class Login extends Component{
     console.log("page", this.state);
     if(this.state.pageStatus == login){
       return(
-        <div>
+        <center>
               <h2>Login</h2>
               <table>
               <tbody>
@@ -33,9 +34,10 @@ class Login extends Component{
                 </tr>
                 </tbody>
               </table>
-              <button type ="button" onClick={this.handleLogin}>LOGIN</button>
-              <button type ="button" onClick={this.handleSignup}>SIGN UP</button>
-          </div>
+              <br/>
+              <Button variant="primary" onClick={this.handleLogin}>LOGIN</Button>
+              <Button variant="success" onClick={this.handleSignup}>SIGN UP</Button>
+          </center>
         ) ;
     }
     else if(this.state.pageStatus == signup){

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Result from "../Result/Result"
-;const results = 2;
+import Result from "../Result/Result";
+import {Button,Table} from 'react-bootstrap';
+const results = 2;
 const que = 1
 class Que extends Component{
     constructor(props){
@@ -40,11 +41,31 @@ class Que extends Component{
             indexQidMap[index] = data[index].Qid;
             qidIndexMap[data[index].Qid] = index+1;
             questionArray[index] = [];
-            questionArray[index].push(<tr >{data[index].Que}  </tr>);
-            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="a"/>{data[index].Op1}</tr>);
-            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="b"/>{data[index].Op2}</tr>);
-            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="c"/>{data[index].Op3} </tr>);
-            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="d"/>{data[index].Op4}</tr>);
+            questionArray[index].push(
+              <tr>
+              <td xs>Que {index+1}:</td>
+              <td> {data[index].Que}</td>
+              </tr>);
+            questionArray[index].push(
+              <tr>
+              <td>a.</td>
+              <td><input type="radio" name="comp" onChange = {this.handleRadio} value="a"/> {data[index].Op1}</td>
+              </tr>);
+            questionArray[index].push(
+              <tr>
+              <td>b.</td>
+              <td><input type="radio" name="comp" onChange = {this.handleRadio} value="b"/> {data[index].Op2}</td>
+              </tr>);
+            questionArray[index].push(
+              <tr>
+              <td>c.</td>
+              <td><input type="radio" name="comp" onChange = {this.handleRadio} value="c"/> {data[index].Op3} </td>
+              </tr>);
+            questionArray[index].push(
+              <tr>
+              <td>d.</td>
+              <td><input type="radio" name="comp" onChange = {this.handleRadio} value="d"/> {data[index].Op4}</td>
+              </tr>);
           }
           this.setState({
             questionArray: questionArray,
@@ -65,21 +86,21 @@ class Que extends Component{
        if(this.state.initial == true && this.state.pageStatus == que){
          if(this.state.max> index){
             return(
-                <div>
+                <center>
                   <table>
                     <tbody>
                       {this.state.questionArray[index]}
                     </tbody>
                   </table>
-                  <button type="button" onClick = {this.handleNext} value="Next">  Next</button>
-                </div>
+                  <Button variant="success" onClick = {this.handleNext} value="Next">  Next</Button>
+                </center>
                 );
           }
           return (
-            <div>
+            <center>
             TEST END!!<br/>
-            <button type="button" onClick = {this.handleEnd} value="Submit">GO TO RESULTS</button>
-            </div>
+            <Button variant="danger" onClick = {this.handleEnd} value="Submit">GO TO RESULTS</Button>
+            </center>
           );
           }
         else if(this.state.pageStatus == results){
