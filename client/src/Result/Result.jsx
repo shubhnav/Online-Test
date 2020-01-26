@@ -3,35 +3,80 @@ class Result extends Component{
   constructor(props){
     super(props);
     this.state = {
-	 
+
     }
-    
+  }
+  async componentWillMount(){
+    let req = {};
+    req.Ans = this.props.data.selectedAns;
+    return new Promise(async(resolve,reject)=>{
+      await fetch("/api/result",{
+        method: "post",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body: JSON.stringify(req)
+      }).then( async function(response){
+        console.log("response",response);
+        let data = await response.json();
+        return data;
+      }).then(data=>{
+
+        let resultArray = [];
+        let total_score = 0;
+        let max_score = 0;
+        for(let index = 0 ;index<data.length;index++){
+          let resultRow = [];
+          max_score +=4;
+          resultRow.push(<td >{this.props.data.qidIndexMap[data[index].Qid]}</td>);
+          resultRow.push(<td>{data[index].selectedOption}</td>);
+          resultRow.push(<td>{data[index].correct_answer}</td>);
+          if(data[index].selectedOption == data[index].correct_answer){
+            resultRow.push(<td>+4</td>);
+            total_score +=4;
+          }
+          else{
+            resultRow.push(<td>0</td>);
+          }
+
+          resultArray.push(<tr>{resultRow}</tr>)
+        };
+        this.setState({
+          resultArray: resultArray,
+          max_score: max_score,
+          initial: true,
+          total_score: total_score
+        });
+
+      })
+    });
   }
   render() {
-    return(
-        <script>
-            function get_score()
-            { var ans1,ans2,ans3;
-            if (document.f.comp.[0].checked)
-              { ans1 = document.f.comp[0].value;}
-            else if(document.f.comp[1].checked)
-              {ans1 = document.f.comp[1].value;}
-            else if(document.f.comp[2].checked)
-              {ans1 = document.f.comp[2].value;} 
-            else if(document.f.comp[3].checked)
-              {ans1 = document.f.comp[3].value;}   
-            }
-            var selected_ans =newArray(ans1,ans2,ans3);
-            var correct_ans = newArray('b');
-            var total =0,i;
-            for(i=0;i<3;i++)
-            { if(selected_ans[i]==correct_ans[i])
-              { total= total+1;
-              }
-            }
-            document.getElementById("result").innerHTML="Your score is :" +total;
+    if(this.state.initial == true){
+      return(
 
-        </script> 
-       );
+          <table>
+          <thead>
+            <th>Question </th>
+            <th>Selected Option</th>
+            <th>Correct Option</th>
+            <th>Marks Obtained</th>
+          </thead>
+          <tbody>
+            {this.state.resultArray}
+          </tbody>
+          </table>
+         );
     }
-        export default Result;
+    else{
+      return (<></>)
+    }
+  }
+  }
+  export default Result;
+/*
+<tr>
+  <td>{this.state.max_score}</td>
+  <td>{this.state.total_score}</td>
+</tr>
+*/

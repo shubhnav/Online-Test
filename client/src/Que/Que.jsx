@@ -1,43 +1,123 @@
 import React, { Component } from 'react';
+import Result from "../Result/Result"
+;const results = 2;
+const que = 1
 class Que extends Component{
-    constructor(props){ 
+    constructor(props){
       super(props);
       this.state = {
+        selectedAns: {},
+        selectedIndex: 0,
+        initial: false,
+        pageStatus: que
      }
-     this.get_score = this.get_score.bind(this);
 
-    } 
-    get_score(){
-
+     this.handleRadio = this.handleRadio.bind(this);
+     this.handleSubmit = this.handleSubmit.bind(this);
+     this.handleNext = this.handleNext.bind(this);
+     this.handleEnd = this.handleEnd.bind(this);
     }
-    render(){
-        return(
-            <div>
-            <table>
-            
-            <tr> Q1:-What is full form of RAM </tr>
-            <tr>   <input type="radio"name="comp" value="a"/>Read Only Memory </tr>
-            <tr>    <input type="radio"name="comp" value="b"/>Random Access Memory </tr>
-            <tr>    <input type="radio"name="comp" value="c"/> Read For Memory </tr>
-            <tr>    <input type="radio"name="comp" value="d"/>Random Only Memory </tr>
-            
-            </table>
 
-           
-            <p><input type="button" value="Submit"/> </p>
-            <p><input type="button" value="Next"/>  </p>
-            {/*<input type = "button" value= "Submit" onClick = {this.get_score}/> */}
-            </div>
-            
-            
-            );
+    async componentWillMount(){
+      let req = {};
+      req.BranchId = this.props.data.selectedBranch
+      return new Promise(async(resolve,reject)=>{
+        await fetch("/api/question",{
+          method: "post",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body: JSON.stringify(req)
+        }).then( async function(response){
+          console.log("response",response);
+          let data = await response.json();
+          return data;
+        }).then(data=>{
+          let questionArray = [];
+          let indexQidMap = {};
+          let qidIndexMap = {};
+          let max = data.length;
+          for(let index = 0 ;index<data.length;index++){
+            indexQidMap[index] = data[index].Qid;
+            qidIndexMap[data[index].Qid] = index+1;
+            questionArray[index] = [];
+            questionArray[index].push(<tr >{data[index].Que}  </tr>);
+            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="a"/>{data[index].Op1}</tr>);
+            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="b"/>{data[index].Op2}</tr>);
+            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="c"/>{data[index].Op3} </tr>);
+            questionArray[index].push(<tr><input type="radio" name="comp" onChange = {this.handleRadio} value="d"/>{data[index].Op4}</tr>);
+          }
+          this.setState({
+            questionArray: questionArray,
+            selectedIndex: 0,
+            initial: true,
+            indexQidMap: indexQidMap,
+            qidIndexMap: qidIndexMap,
+            max: max
+          });
+
+        })
+      });
+    }
+
+    render(){
+       let index = this.state.selectedIndex;
+       console.log("index",this.state);
+       if(this.state.initial == true && this.state.pageStatus == que){
+         if(this.state.max> index){
+            return(
+                <div>
+                  <table>
+                    <tbody>
+                      {this.state.questionArray[index]}
+                    </tbody>
+                  </table>
+                  <button type="button" onClick = {this.handleSubmit} value="Submit">Submit</button>
+                  <button type="button" onClick = {this.handleNext} value="Next">  Next</button>
+                </div>
+                );
+          }
+          return (<button type="button" onClick = {this.handleEnd} value="Submit">End</button>);
+          }
+        else if(this.state.pageStatus == results){
+          let data = {};
+          data.selectedAns = this.state.selectedAns;
+          data.qidIndexMap = this.state.qidIndexMap;
+          return(<Result data = {data} ></Result>);
+        }
+        else{
+          return(<></>);
         }
     }
-    export default Que;
 
-    // <p> Q2:-What is captial of India ? 
-    // <input type="radio"name="comp" value="a"/>New Delhi 
-    // <input type="radio"name="comp" value="b"/>Mumbai 
-    // <input type="radio"name="comp" value="c"/>Chennai 
-    // <input type="radio"name="comp" value="d"/>Ahmedabad 
-    // </p>
+   handleRadio = event=>{
+     this.setState({
+       selectedOption: event.target.value
+     })
+   }
+
+   handleEnd(){
+     this.setState({
+       pageStatus: results
+     });
+   }
+
+   handleSubmit(){
+      let qid = this.state.indexQidMap[this.state.selectedIndex];
+      let selectedOption = this.state.selectedOption;
+      let selectedAns = this.state.selectedAns;
+      selectedAns[qid] = selectedOption;
+      this.setState({
+        selectedAns: selectedAns
+      })
+   }
+
+   handleNext(){
+     let selectedIndex = this.state.selectedIndex;
+     selectedIndex++;
+     this.setState({
+       selectedIndex: selectedIndex
+     })
+   }
+    }
+    export default Que;
