@@ -2,6 +2,9 @@ import React ,{ Component } from 'react';
 import {Button} from 'react-bootstrap';
 import Que from "../Que/Que";
 import Login from "../Login/Login";
+import Tab from "../TopNavigationTab/topNavigation";
+import Badge from 'react-bootstrap/Badge'
+
 const que=2;
 const course=1;
 const login = 3;
@@ -29,7 +32,9 @@ class Course extends Component{
         }).then(data=>{
           let branch = [];
           for(let index = 0 ;index<data.length;index++){
-            branch.push(<Button variant="outline-secondary" value = {data[index].BranchId} onClick={this.handleCourse}>{data[index].BranchName} </Button>);
+            branch.push(<><Button variant="outline-secondary"
+            value = {data[index].BranchId} onClick={this.handleCourse}>
+            {data[index].BranchName} </Button>{' '}</>);
           }
           this.setState({
             branch: branch
@@ -43,14 +48,17 @@ class Course extends Component{
     console.log("State", this.state);
     if(this.state.pageStatus == course){
         return (
+          <>
+          <Tab/>
              <center>
-                <h1>Choose Your Branch</h1>
+                <h2><Badge variant="info">Choose Your Branch</Badge></h2>
                     {this.state.branch}
                 <br/>
                 <br/>
                 <br/>
                 <Button variant="danger" onClick = {this.handlelogout} value = {login} >LOG OUT</Button>
               </center>
+          </>
         )
     }
     else if(this.state.pageStatus == que){

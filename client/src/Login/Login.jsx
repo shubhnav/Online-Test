@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Button} from 'react-bootstrap';
+import {Button,Table} from 'react-bootstrap';
 import Course_selection from "../Course_selection/Course_selection"
 import SignUp from "../Signup/Signup";
+
 const course = 2;
 const login = 1;
 const signup = 3;
@@ -17,8 +18,7 @@ class Login extends Component{
   }
 
   render(){
-    console.log("page", this.state);
-    if(this.state.pageStatus == login){
+    if(this.state.pageStatus === login){
       return(
         <center>
               <h2>Login</h2>
@@ -32,15 +32,17 @@ class Login extends Component{
                   <td> Password:</td>
                   <td> <input type ="Password"  id = "pass" /> </td>
                 </tr>
+                <tr>
+                </tr>
                 </tbody>
               </table>
               <br/>
-              <Button variant="primary" onClick={this.handleLogin}>LOGIN</Button>
+              <Button variant="primary" onClick={this.handleLogin}>LOGIN</Button>{' '}
               <Button variant="success" onClick={this.handleSignup}>SIGN UP</Button>
           </center>
         ) ;
     }
-    else if(this.state.pageStatus == signup){
+    else if(this.state.pageStatus === signup){
       return(<SignUp/>)
     }
     else{

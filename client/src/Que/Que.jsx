@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Result from "../Result/Result";
 import {Button,Table} from 'react-bootstrap';
+import Tab from "../TopNavigationTab/topNavigation";
+import ReactCountdownClock from "react-countdown-clock"
+
 const results = 2;
 const que = 1
 class Que extends Component{
@@ -86,6 +89,12 @@ class Que extends Component{
        if(this.state.initial == true && this.state.pageStatus == que){
          if(this.state.max> index){
             return(
+                <>
+                <ReactCountdownClock seconds={60}
+                       color="#000"
+                       alpha={0.9}
+                       size={100}
+                       onComplete = {this.handleEnd}/>
                 <center>
                   <table>
                     <tbody>
@@ -94,10 +103,12 @@ class Que extends Component{
                   </table>
                   <Button variant="success" onClick = {this.handleNext} value="Next">  Next</Button>
                 </center>
+                </>
                 );
           }
           return (
             <center>
+            <Tab/>
             TEST END!!<br/>
             <Button variant="danger" onClick = {this.handleEnd} value="Submit">GO TO RESULTS</Button>
             </center>

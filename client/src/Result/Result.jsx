@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Button,Table} from 'react-bootstrap';
 import Course from "../Course_selection/Course_selection";
+import Tab from "../TopNavigationTab/topNavigation";
+
 const course = 2;
 class Result extends Component{
   constructor(props){
@@ -63,6 +65,7 @@ class Result extends Component{
       else{
       return(
           <>
+          <Tab/>
           <Table striped bordered hover>
           <thead>
             <th>QUESTION </th>

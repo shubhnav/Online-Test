@@ -12,15 +12,15 @@ INSERT INTO Users VALUES(1,"Admin",'Admin@123');
 CREATE TABLE IF NOT EXISTS
 Branch(
   BranchId  INT (3) NOT NULL ,
-  BranchName varchar(10) NOT NULL,
+  BranchName varchar(30) NOT NULL,
   PRIMARY KEY(BranchId)
 );
 
-INSERT INTO Branch VALUES (101,'CS');
-INSERT INTO Branch VALUES (102,'ME');
-INSERT INTO Branch VALUES (103,'EC');
-INSERT INTO Branch VALUES (104,'EE');
-INSERT INTO Branch VALUES (105,'CE');
+INSERT INTO Branch VALUES (101,'Computer Science');
+INSERT INTO Branch VALUES (102,'Mechanical ');
+INSERT INTO Branch VALUES (103,'Electrical');
+INSERT INTO Branch VALUES (104,'Chemical');
+INSERT INTO Branch VALUES (105,'Civil');
 
 CREATE TABLE
 IF NOT EXISTS
