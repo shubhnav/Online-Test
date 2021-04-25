@@ -97,9 +97,6 @@ class Login extends Component{
           await this.checkValidUser(user,pass);
         }
     })
-
-
-
     }
 }
  export default Login;
